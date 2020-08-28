@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller     
 @RequestMapping(path="/turma")  
 public class TurmaController {
-	@PostMapping(path="/todos")
+	@GetMapping(path="/todos")
 	public @ResponseBody List<Turma> getTodos() {
 		Turma t1 = new Turma("ENGSOFT2", 2020, 4);
 		Turma t2 = new Turma("ENGSOFT6", 2020, 6);
