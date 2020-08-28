@@ -1,12 +1,21 @@
 package br.edu.cassio;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Turma {
 	
+	@Column
 	private String nome;
+	
+	@Column
 	private Integer ano;
+	
+	@Column
 	private Integer creditos;
 
-
+	
 	public Turma(String nome, Integer ano, Integer creditos) {
 		super();
 		this.nome = nome;
