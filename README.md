@@ -18,3 +18,9 @@ create user 'cassio'@'%' identified by '123';
 
 mysql> 
 grant all on aulamvc.* to 'cassio'@'%
+
+
+@Transactional
+
+//resolve problema de referencia circular
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)

@@ -2,19 +2,28 @@ package br.edu.cassio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+ 
 
-@Entity
+@Entity (name = "tb_turma")
 public class Turma {
-	
-	@Column
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer codigo;
+    
 	private String nome;
 	
-	@Column
 	private Integer ano;
 	
-	@Column
+	@Column (name="Credito")
 	private Integer creditos;
 
+	
+	public Turma() {
+
+	}
 	
 	public Turma(String nome, Integer ano, Integer creditos) {
 		super();
