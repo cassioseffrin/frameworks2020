@@ -24,3 +24,10 @@ grant all on aulamvc.* to 'cassio'@'%
 
 //resolve problema de referencia circular
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
+
+
+http://localhost:8080/aluno/adicionar?nome=Teylor&endereco=RuaA&cidade=Concordia&cpf=2343465345&turmaId=6
+
+http://localhost:8080/turma/adicionar?nome=engsoftware8a&creditos=2&ano=2020
+
+

@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AlunoController {
 
 	@Autowired
-	private AlunoRepository AlunoRepository;
+	private AlunoRepository alunoRepository;
 
 	@Autowired
 	private TurmaRepository turmaRepository;
 
 	@GetMapping(path = "/todos")
 	public @ResponseBody List<Aluno> getTodos() {
-		Iterable<Aluno> Alunos = AlunoRepository.findAll();
+		Iterable<Aluno> Alunos = alunoRepository.findAll();
 		ArrayList<Aluno> list = new ArrayList<Aluno>();
 		Alunos.forEach(t -> list.add(t));
 		return list;
@@ -40,7 +40,7 @@ public class AlunoController {
 		Turma t = turmaRepository.findById(turmaId).orElse(new Turma());
 		t.getAlunoCollection().forEach(al -> System.out.println(al));
 		a.setTurma(t);
-		AlunoRepository.save(a);
+		alunoRepository.save(a);
 		return "Aluno Salvo!";
 	}
 

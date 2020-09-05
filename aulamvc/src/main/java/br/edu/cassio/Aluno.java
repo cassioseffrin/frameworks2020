@@ -25,7 +25,6 @@ public class Aluno {
 	private String cidade;	
 	private String cpf;
 	
-
 	Aluno(){
 	}
 	 
