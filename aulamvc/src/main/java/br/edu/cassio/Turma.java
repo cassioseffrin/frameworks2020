@@ -1,26 +1,34 @@
 package br.edu.cassio;
 
-import javax.persistence.Column;
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
- 
+import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+ 
+@Getter
+@Setter
 @Entity (name = "tb_turma")
+@AllArgsConstructor
 public class Turma {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer codigo;
+    private Integer id;
     
 	private String nome;
 	
 	private Integer ano;
 	
-	@Column (name="Credito")
 	private Integer creditos;
 
-	
 	public Turma() {
 
 	}
@@ -31,32 +39,9 @@ public class Turma {
 		this.ano = ano;
 		this.creditos = creditos;
 	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Integer getAno() {
-		return ano;
-	}
-
-	public void setAno(Integer ano) {
-		this.ano = ano;
-	}
-
-	public Integer getCreditos() {
-		return creditos;
-	}
-
-	public void setCreditos(Integer creditos) {
-		this.creditos = creditos;
-	}
 	
-	
-	
+ 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "turma", fetch = FetchType.EAGER)
+    private Collection<Aluno> alunoCollection;
 
 }
