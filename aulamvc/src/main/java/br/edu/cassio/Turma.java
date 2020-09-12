@@ -9,6 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.transaction.Transactional;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +22,8 @@ import lombok.Setter;
 @Setter
 @Entity (name = "tb_turma")
 @AllArgsConstructor
+@Transactional
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
 public class Turma {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -30,7 +36,6 @@ public class Turma {
 	private Integer creditos;
 
 	public Turma() {
-
 	}
 	
 	public Turma(String nome, Integer ano, Integer creditos) {

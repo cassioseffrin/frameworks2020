@@ -16,7 +16,7 @@ public class TurmaController {
 	@Autowired
 	private TurmaRepository turmaRepository;
 
-	@GetMapping(path = "/todos")
+	@GetMapping(path = "/todas")
 	public @ResponseBody List<Turma> getTodos() {
 		Iterable<Turma> turmas = turmaRepository.findAll();
 		ArrayList<Turma> list = new ArrayList<Turma>();
