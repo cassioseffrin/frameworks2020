@@ -1,6 +1,6 @@
-package br.edu.cassio;
+package br.edu.cassio.entidades;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import lombok.Setter;
  
 @Getter
 @Setter
-@Entity (name = "tb_turma")
+@Entity
 @AllArgsConstructor
 @Transactional
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class)
@@ -31,22 +31,15 @@ public class Turma {
     
 	private String nome;
 	
-	private Integer ano;
-	
-	private Integer creditos;
-
 	public Turma() {
 	}
 	
 	public Turma(String nome, Integer ano, Integer creditos) {
 		super();
 		this.nome = nome;
-		this.ano = ano;
-		this.creditos = creditos;
 	}
-	
  
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "turma", fetch = FetchType.EAGER)
-    private Collection<Aluno> alunoCollection;
+    private List<Matricula> matriculas;
 
 }

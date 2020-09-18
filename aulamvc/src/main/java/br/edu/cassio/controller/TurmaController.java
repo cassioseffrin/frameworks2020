@@ -1,4 +1,4 @@
-package br.edu.cassio;
+package br.edu.cassio.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import br.edu.cassio.entidades.Turma;
+import br.edu.cassio.repository.TurmaRepository;
 @Controller
 @RequestMapping(path = "/turma")
 public class TurmaController {

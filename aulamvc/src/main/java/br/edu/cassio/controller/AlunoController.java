@@ -1,4 +1,4 @@
-package br.edu.cassio;
+package br.edu.cassio.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import br.edu.cassio.entidades.Aluno;
+import br.edu.cassio.entidades.Turma;
+import br.edu.cassio.repository.AlunoRepository;
+import br.edu.cassio.repository.TurmaRepository;
 
 @Controller
 @RequestMapping(path = "/aluno")
@@ -29,19 +34,19 @@ public class AlunoController {
 		return list;
 	}
 
-	@GetMapping(path = "/adicionar")
-	public @ResponseBody String addAluno(@RequestParam String nome, @RequestParam String endereco,
-			@RequestParam String cidade, @RequestParam String cpf, @RequestParam Integer turmaId) {
-		Aluno a = new Aluno();
-		a.setNome(nome);
-		a.setEndereco(endereco);
-		a.setCidade(cidade);
-		a.setCpf(cpf);
-		Turma t = turmaRepository.findById(turmaId).orElse(new Turma());
-		t.getAlunoCollection().forEach(al -> System.out.println(al));
-		a.setTurma(t);
-		alunoRepository.save(a);
-		return "Aluno Salvo!";
-	}
+//	@GetMapping(path = "/adicionar")
+//	public @ResponseBody String addAluno(@RequestParam String nome, @RequestParam String endereco,
+//			@RequestParam String cidade, @RequestParam String cpf, @RequestParam Integer turmaId) {
+//		Aluno a = new Aluno();
+//		a.setNome(nome);
+//		a.setEndereco(endereco);
+//		a.setCidade(cidade);
+//		a.setCpf(cpf);
+//		Turma t = turmaRepository.findById(turmaId).orElse(new Turma());
+//		t.getAlunoCollection().forEach(al -> System.out.println(al));
+//		a.setTurma(t);
+//		alunoRepository.save(a);
+//		return "Aluno Salvo!";
+//	}
 
 }
