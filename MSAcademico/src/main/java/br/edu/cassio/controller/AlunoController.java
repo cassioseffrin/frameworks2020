@@ -34,19 +34,23 @@ public class AlunoController {
 		return list;
 	}
 
-//	@GetMapping(path = "/adicionar")
-//	public @ResponseBody String addAluno(@RequestParam String nome, @RequestParam String endereco,
-//			@RequestParam String cidade, @RequestParam String cpf, @RequestParam Integer turmaId) {
-//		Aluno a = new Aluno();
-//		a.setNome(nome);
-//		a.setEndereco(endereco);
-//		a.setCidade(cidade);
-//		a.setCpf(cpf);
-//		Turma t = turmaRepository.findById(turmaId).orElse(new Turma());
-//		t.getAlunoCollection().forEach(al -> System.out.println(al));
-//		a.setTurma(t);
-//		alunoRepository.save(a);
-//		return "Aluno Salvo!";
-//	}
+	@GetMapping(path = "/findAlunoById")
+	public @ResponseBody Aluno getAluno(@RequestParam Integer id) {
+		Aluno aluno = alunoRepository.findById(id).orElse(new Aluno());
+		return aluno;
+	}
+
+	@GetMapping(path = "/adicionar")
+	public @ResponseBody String addAluno(@RequestParam String nome, @RequestParam String endereco,
+			@RequestParam String cidade, @RequestParam String cpf) {
+		Aluno a = new Aluno();
+		a.setNome(nome);
+		a.setEndereco(endereco);
+		a.setCidade(cidade);
+		a.setCpf(cpf);
+
+		alunoRepository.save(a);
+		return "Aluno Salvo!";
+	}
 
 }
