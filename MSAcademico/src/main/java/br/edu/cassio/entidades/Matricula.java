@@ -44,7 +44,6 @@ public class Matricula {
     @ManyToOne(optional = false)
     private Turma turma;
     
-    
 	@ManyToMany
 	private List<Disciplina> disciplinas;
 

@@ -45,8 +45,8 @@ public class AlunoController {
 			@RequestParam String cidade, @RequestParam String cpf) {
 		Aluno a = new Aluno();
 		a.setNome(nome);
-		a.setEndereco(endereco);
-		a.setCidade(cidade);
+//		a.setEndereco(endereco);
+//		a.setCidade(cidade);
 		a.setCpf(cpf);
 
 		alunoRepository.save(a);

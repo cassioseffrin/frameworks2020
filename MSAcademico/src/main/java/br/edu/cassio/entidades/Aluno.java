@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -31,8 +33,6 @@ public class Aluno {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
-	private String endereco;
-	private String cidade;
 	private String cpf;
 
 	public Aluno() {
@@ -40,5 +40,10 @@ public class Aluno {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno", fetch = FetchType.EAGER)
 	private List<Matricula> matriculas;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private Endereco endereco;
+
 
 }

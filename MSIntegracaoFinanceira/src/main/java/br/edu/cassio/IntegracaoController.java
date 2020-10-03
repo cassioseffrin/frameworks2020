@@ -20,7 +20,11 @@ public class IntegracaoController {
 		RestTemplate rest = new RestTemplate();
 		String url = "http://localhost:8080/aluno/findAlunoById?id=" + id;
 		AlunoDTO aluno = rest.getForObject(url, AlunoDTO.class);
-		return aluno;
+		
+		
+		String urlParcelas = "http://localhost:8081/parcela/parcelasAluno?alunoId=" + id;
+//		ParcelasInadimpletesDTO parcelas = rest.getForObject(url, ParcelasInadimpletesDTO.class);
+		return parcelas;
 	}
 
 }
