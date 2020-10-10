@@ -1,5 +1,6 @@
 package br.edu.cassio.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,13 @@ public class ParcelaController {
 	}
 	
 	
+	@GetMapping(path = "/parcelasInadimplentes")
+	public @ResponseBody List<Parcela> getParcelasInadimplentes() {
+		List<Parcela> parcelas = parcelaRepository.findAllParcelasInadimplentes();
+		return parcelas;
+	}
+	
+	
 	@GetMapping(path = "/parcelasAluno")
 	public @ResponseBody List<Parcela> getParcelasAluno(@RequestParam Integer alunoId) {
 		Iterable<Parcela> parcelas = parcelaRepository.findAll();
@@ -43,11 +51,17 @@ public class ParcelaController {
 
 	@GetMapping(path = "/adicionar")
 	public @ResponseBody String addParcela(@RequestParam Integer alunoId, @RequestParam Double valor,
-			@RequestParam String dataVencimento, @RequestParam String numero) {
+		  @RequestParam String numero) {
 		Parcela p = new Parcela();
 		p.setAlunoId(alunoId);
 		p.setValor(valor);
+		
+		LocalDate dataVencimento =  LocalDate.now();
+		
+//		dataVencimento.in
 		p.setDataVencimento(dataVencimento);
+		
+		
 		p.setNumero(numero);
 		parcelaRepository.save(p);
 		return "parcela Salva!";
