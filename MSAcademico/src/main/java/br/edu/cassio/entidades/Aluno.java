@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.transaction.Transactional;
@@ -34,6 +35,9 @@ public class Aluno {
 	private Integer id;
 	private String nome;
 	private String cpf;
+	
+	@ManyToOne()
+	private Universidade universidade;
 
 	public Aluno() {
 	}
@@ -43,7 +47,6 @@ public class Aluno {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
-    private Endereco endereco;
-
+    private Endereco endereco;	
 
 }
