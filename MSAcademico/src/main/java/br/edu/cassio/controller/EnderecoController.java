@@ -5,15 +5,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.edu.cassio.entidades.Aluno;
- 
-
+import br.edu.cassio.entidades.Endereco;
 
 @Controller
-@RequestMapping(path = "/aluno")
-public class AlunoController extends CRUDController<Aluno , Integer>   {
-	@Autowired
-	public AlunoController(CrudRepository<Aluno, Integer> repository) {
+@RequestMapping("/endereco")
+public class EnderecoController extends CRUDController<Endereco, Integer> {
+    @Autowired
+    public EnderecoController(CrudRepository<Endereco, Integer> repository) {
         super(repository);
     }
 }
