@@ -11,5 +11,5 @@ public interface ParcelaRepository extends CrudRepository<Parcela, Integer> {
 
 	@Query("SELECT p FROM Parcela p")
 	List<Parcela> findAllParcelasInadimplentes();
-//	Iterable<Parcela>
+
 }
