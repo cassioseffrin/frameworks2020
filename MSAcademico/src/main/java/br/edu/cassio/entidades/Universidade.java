@@ -9,7 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Getter;
+import lombok.Setter;
+@Setter
+@Getter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Universidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,41 +32,7 @@ public class Universidade {
 	private List<Professor> professores = new ArrayList<Professor>();
 	
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getCnpj() {
-		return cnpj;
-	}
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-	
-	
-	
-	
-	
-	public List<Aluno> getAlunos() {
-		return alunos;
-	}
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
-	}
-	public List<Professor> getProfessores() {
-		return professores;
-	}
-	public void setProfessores(List<Professor> professores) {
-		this.professores = professores;
-	}
+	 
 	@Override
 	public String toString() {
 		return "Universidade [nome=" + nome + "]";

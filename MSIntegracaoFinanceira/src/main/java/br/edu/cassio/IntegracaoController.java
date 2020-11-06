@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,8 +21,8 @@ import br.edu.cassio.dto.ParcelaDTO;
 @ComponentScan
 public class IntegracaoController {
 	
-	@Autowired
-	RestTemplate rest = new RestTemplate();
+//	@Autowired
+//	RestTemplate rest = new RestTemplate();
 
 	@GetMapping("/parcelasInacimpletes")
 	public @ResponseBody List<ClienteInadimplenteDTO> parcelasInacimpletes() {
@@ -32,7 +31,7 @@ public class IntegracaoController {
 	}
 
 	private ArrayList<ClienteInadimplenteDTO> getParcelasInadimplentes() {
-		
+		RestTemplate rest = new RestTemplate();
 		String url = "http://localhost:8081/parcela/parcelasInadimplentes";
 		ResponseEntity<ParcelaDTO[]> response = rest.getForEntity(url, ParcelaDTO[].class);
 		ParcelaDTO[] lstParcelas = response.getBody();

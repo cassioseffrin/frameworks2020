@@ -10,9 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Professor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,31 +33,7 @@ public class Professor {
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public Universidade getUniversidade() {
-		return universidade;
-	}
-	public void setUniversidade(Universidade universidade) {
-		this.universidade = universidade;
-	}
-	public List<Disciplina> getDisciplica() {
-		return disciplinas;
-	}
-	public void setDisciplica(List<Disciplina> disciplica) {
-		this.disciplinas = disciplica;
-	}
+	 
 	@Override
 	public String toString() {
 		return "Professor [nome=" + nome + "]";
@@ -81,8 +64,6 @@ public class Professor {
 			return false;
 		return true;
 	}
-	
-	
 	
 	
 
