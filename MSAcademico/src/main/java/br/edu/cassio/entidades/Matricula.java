@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.transaction.Transactional;
@@ -44,8 +45,11 @@ public class Matricula {
     @ManyToOne(optional = false)
     private Turma turma;
     
-	@ManyToMany
+	@ManyToMany(mappedBy = "matriculas")
 	private List<Disciplina> disciplinas;
+	
+	@ManyToOne()
+	private Curso curso;
 
 //		@ManyToMany
 //		@JoinTable(name = "matricula_disciplina", joinColumns = {

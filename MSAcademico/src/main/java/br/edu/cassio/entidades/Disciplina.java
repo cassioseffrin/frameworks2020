@@ -1,5 +1,6 @@
 package br.edu.cassio.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -32,6 +33,9 @@ public class Disciplina {
 
 	@ManyToMany
 	private List<Matricula> matriculas;
+	
+	@ManyToMany(mappedBy = "disciplinas")
+	private List<Professor> profesosres = new ArrayList<Professor>();
 
 //		@ManyToMany(mappedBy = "disciplinas")
 //		private List<Matricula> matriculas;
