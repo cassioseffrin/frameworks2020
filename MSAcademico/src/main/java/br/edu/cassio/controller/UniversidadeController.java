@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.edu.cassio.entidades.Universidade;
 
 @Controller
-@RequestMapping("/universiade")
+@RequestMapping("/universidade")
 public class UniversidadeController extends CRUDController<Universidade, Integer> {
     
 	@Autowired
