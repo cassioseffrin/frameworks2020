@@ -35,6 +35,7 @@ public abstract class CRUDController<T, ID extends Serializable> {
 	@GetMapping(path = "/findById")
 	public @ResponseBody Object getById(@RequestParam ID id) {
 		Optional<T> objeto = this.repository.findById(id);
+		log.info("chamado endpoint findById, classe: "+ objeto.getClass());
 		return objeto;
 	}
 

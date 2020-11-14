@@ -29,9 +29,6 @@ public class IntegracaoController {
 
 	@Autowired
 	LoadBalancerClient loadBalancer;
-	
-//	@Autowired
-//	
  
 	@GetMapping("/findAlunoById/{id}")
 	public  @ResponseBody AlunoDTO findAluno(@PathVariable int id) {
