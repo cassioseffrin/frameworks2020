@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,17 +21,23 @@ import br.edu.cassio.dto.AlunoDTO;
 import br.edu.cassio.dto.ClienteInadimplenteDTO;
 import br.edu.cassio.dto.ParcelaDTO;
 import br.edu.cassio.feign.AlunoProxy;
+ 
 import br.edu.cassio.feign.FinanceiroProxy;
 import lombok.extern.slf4j.Slf4j;
-
+ 
 @Controller
 @RequestMapping(path = "/integracaoFinanceira")
 @ComponentScan
+ 
 @Slf4j
+ 
+
+
 public class IntegracaoController {
 
 	@Autowired
 	LoadBalancerClient loadBalancer;
+ 
 
 	@Autowired
 	private AlunoProxy alunoProxy;
@@ -52,7 +57,10 @@ public class IntegracaoController {
 	@GetMapping("/findAlunoByIdFeign/{id}")
 	public @ResponseBody AlunoDTO findAlunoFeign(@PathVariable int id) {
 		return alunoProxy.pegarDados(id);
+ 
 	}
+ 
+ 
 
 	@GetMapping("/parcelasInadimplentes")
 	public @ResponseBody List<ClienteInadimplenteDTO> parcelasInacimpletes() {

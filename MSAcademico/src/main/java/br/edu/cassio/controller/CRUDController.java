@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+ 
 import br.edu.cassio.uteis.Uteis;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,8 +33,13 @@ public abstract class CRUDController<T, ID extends Serializable> {
 		return Uteis.converterInterabelParaList(todos);
 	}
 
+ 
+	
+ 
+	
 	@GetMapping(path = "/findById/{id}")
-	public @ResponseBody Object getById(@PathVariable(name = "id") ID id) {
+	public @ResponseBody Object getById(@PathVariable("id")  ID id) {
+ 
 		Optional<T> objeto = this.repository.findById(id);
 		log.info("chamado endpoint findById, classe: "+ objeto.getClass());
 		return objeto;
