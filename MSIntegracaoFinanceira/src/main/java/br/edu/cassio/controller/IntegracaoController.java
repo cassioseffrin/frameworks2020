@@ -21,47 +21,58 @@ import org.springframework.web.client.RestTemplate;
 import br.edu.cassio.dto.AlunoDTO;
 import br.edu.cassio.dto.ClienteInadimplenteDTO;
 import br.edu.cassio.dto.ParcelaDTO;
+import br.edu.cassio.feign.AlunoProxy;
+import br.edu.cassio.feign.FinanceiroProxy;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping(path = "/integracaoFinanceira")
 @ComponentScan
+@Slf4j
 public class IntegracaoController {
 
 	@Autowired
 	LoadBalancerClient loadBalancer;
- 
-	@GetMapping("/findAlunoById/{id}")
-	public  @ResponseBody AlunoDTO findAluno(@PathVariable int id) {
-		ServiceInstance instance = loadBalancer.choose("msacademico");
-		URI uriAluno = URI.create(String.format("http://%s:%s/aluno/findById?id=%s", instance.getHost(), instance.getPort(), id));
-		RestTemplate rest = new RestTemplate();
-		AlunoDTO a = rest.getForObject(uriAluno, AlunoDTO.class);
-		return a;
+
+	@Autowired
+	private AlunoProxy alunoProxy;
+
+	@Autowired
+	private FinanceiroProxy financeiroProxy;
+
+//	@GetMapping("/findAlunoById/{id}")
+//	public  @ResponseBody AlunoDTO findAluno(@PathVariable int id) {
+//		ServiceInstance instance = loadBalancer.choose("msacademico");
+//		URI uriAluno = URI.create(String.format("http://%s:%s/aluno/findById?id=%s", instance.getHost(), instance.getPort(), id));
+//		RestTemplate rest = new RestTemplate();
+//		AlunoDTO a = rest.getForObject(uriAluno, AlunoDTO.class);
+//		return a;
+//	}
+
+	@GetMapping("/findAlunoByIdFeign/{id}")
+	public @ResponseBody AlunoDTO findAlunoFeign(@PathVariable int id) {
+		return alunoProxy.pegarDados(id);
 	}
 
-	@GetMapping("/parcelasInacimpletes")
+	@GetMapping("/parcelasInadimplentes")
 	public @ResponseBody List<ClienteInadimplenteDTO> parcelasInacimpletes() {
-		ArrayList<ClienteInadimplenteDTO> lstInadim = getParcelasInadimplentes();
-		return lstInadim;
-	}
-
-	private ArrayList<ClienteInadimplenteDTO> getParcelasInadimplentes() {
-		RestTemplate rest = new RestTemplate();
-		String url = "http://localhost:8081/parcela/parcelasInadimplentes";
-		ResponseEntity<ParcelaDTO[]> response = rest.getForEntity(url, ParcelaDTO[].class);
-		ParcelaDTO[] lstParcelas = response.getBody();
+		List<ParcelaDTO> lstParcelas = financeiroProxy.todasParcelasInadimplentes();
 		ArrayList<ClienteInadimplenteDTO> lstInadim = new ArrayList<>();
-		for (int i = 0; i < lstParcelas.length; i++) {
-			ParcelaDTO p = lstParcelas[i];
-			String urlAluno = "	" + p.getAlunoId();
-			AlunoDTO a = rest.getForObject(urlAluno, AlunoDTO.class);
-			LocalDate dataAtual = LocalDate.now();
-			long diff = dataAtual.toEpochDay() - p.getDataVencimento().toEpochDay();
+		for (ParcelaDTO p : lstParcelas) {
+			AlunoDTO a = alunoProxy.pegarDados(p.getAlunoId());
+			long diferencaData = diferencaData(p);
 			ClienteInadimplenteDTO cli = new ClienteInadimplenteDTO(a.getNome(), a.getCpf(), p.getDataVencimento(),
-					diff, p.getDesconto(), p.getAcrescimo(), p.getNumero());
+					diferencaData, p.getDesconto(), p.getAcrescimo(), p.getNumero());
 			lstInadim.add(cli);
 		}
 		return lstInadim;
+	}
+	
+	
+	private long diferencaData(ParcelaDTO p) {
+		LocalDate dataAtual = LocalDate.now();
+		long diff = dataAtual.toEpochDay() - p.getDataVencimento().toEpochDay();
+		return diff;
 	}
 
 }

@@ -6,13 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @EnableEurekaClient
 public class MSAcademico {
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(MSAcademico.class, args);
 	}
-
 }
